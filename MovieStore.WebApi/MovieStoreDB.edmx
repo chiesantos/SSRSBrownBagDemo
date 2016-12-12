@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MovieStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MovieStoreModelStoreContainer">
+          <EntitySet Name="Genres" EntityType="MovieStoreModel.Store.Genres" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Movies" EntityType="MovieStoreModel.Store.Movies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Mpaa" EntityType="MovieStoreModel.Store.Mpaa" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="vwMovies" EntityType="MovieStoreModel.Store.vwMovies" store:Type="Views" store:Schema="dbo" store:Name="vwMovies">
+            <DefiningQuery>SELECT 
+      [vwMovies].[MovieID] AS [MovieID], 
+      [vwMovies].[Title] AS [Title], 
+      [vwMovies].[Genre] AS [Genre], 
+      [vwMovies].[Director] AS [Director], 
+      [vwMovies].[YearReleased] AS [YearReleased], 
+      [vwMovies].[MpaaRating] AS [MpaaRating], 
+      [vwMovies].[ReviewRating] AS [ReviewRating], 
+      [vwMovies].[Price] AS [Price], 
+      [vwMovies].[Stock] AS [Stock]
+      FROM [dbo].[vwMovies] AS [vwMovies]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Movies_Genres" Association="MovieStoreModel.Store.FK_Movies_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movies_MPAA" Association="MovieStoreModel.Store.FK_Movies_MPAA">
+            <End Role="Mpaa" EntitySet="Mpaa" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="Genre" Type="bigint" />
+          <Property Name="Director" Type="varchar" MaxLength="100" />
+          <Property Name="ReviewRating" Type="int" />
+          <Property Name="MPAARating" Type="bigint" />
+          <Property Name="YearReleased" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="Enable" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mpaa">
+          <Key>
+            <PropertyRef Name="MpaaID" />
+          </Key>
+          <Property Name="MpaaID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Rating" Type="varchar" MaxLength="15" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'MovieStore.dbo.vwMovies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vwMovies">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="bigint" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="Genre" Type="varchar" MaxLength="50" />
+          <Property Name="Director" Type="varchar" MaxLength="100" />
+          <Property Name="YearReleased" Type="int" />
+          <Property Name="MpaaRating" Type="varchar" MaxLength="15" />
+          <Property Name="ReviewRating" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Stock" Type="int" />
+        </EntityType>
+        <Association Name="FK_Movies_Genres">
+          <End Role="Genres" Type="MovieStoreModel.Store.Genres" Multiplicity="0..1" />
+          <End Role="Movies" Type="MovieStoreModel.Store.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="Genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movies_MPAA">
+          <End Role="Mpaa" Type="MovieStoreModel.Store.Mpaa" Multiplicity="0..1" />
+          <End Role="Movies" Type="MovieStoreModel.Store.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mpaa">
+              <PropertyRef Name="MpaaID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="MPAARating" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.FK_Movies_Genres" FromRole="Genres" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Genre" Type="Int64" />
+          <Property Name="Director" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ReviewRating" Type="Int32" />
+          <Property Name="MPAARating" Type="Int64" />
+          <Property Name="YearReleased" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="Enable" Type="Boolean" />
+          <NavigationProperty Name="Genres" Relationship="Self.FK_Movies_Genres" FromRole="Movies" ToRole="Genres" />
+          <NavigationProperty Name="Mpaa" Relationship="MovieStoreModel.FK_Movies_MPAA" FromRole="Movies" ToRole="Mpaa" />
+        </EntityType>
+        <Association Name="FK_Movies_Genres">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="Genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieStoreContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genres" EntityType="Self.Genres" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" />
+          <AssociationSet Name="FK_Movies_Genres" Association="Self.FK_Movies_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <EntitySet Name="Mpaa" EntityType="MovieStoreModel.Mpaa" />
+          <AssociationSet Name="FK_Movies_MPAA" Association="MovieStoreModel.FK_Movies_MPAA">
+            <End Role="Mpaa" EntitySet="Mpaa" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <EntitySet Name="vwMovies" EntityType="MovieStoreModel.vwMovies" />
+        </EntityContainer>
+        <EntityType Name="Mpaa">
+          <Key>
+            <PropertyRef Name="MpaaID" />
+          </Key>
+          <Property Type="Int64" Name="MpaaID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Rating" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Enable" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="MovieStoreModel.FK_Movies_MPAA" FromRole="Mpaa" ToRole="Movies" />
+        </EntityType>
+        <Association Name="FK_Movies_MPAA">
+          <End Type="MovieStoreModel.Mpaa" Role="Mpaa" Multiplicity="0..1" />
+          <End Type="MovieStoreModel.Movies" Role="Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mpaa">
+              <PropertyRef Name="MpaaID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="MPAARating" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwMovies">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Type="Int64" Name="MovieID" Nullable="false" />
+          <Property Type="String" Name="Title" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Genre" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Director" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MpaaRating" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ReviewRating" />
+          <Property Type="Int32" Name="Price" />
+          <Property Type="Int32" Name="Stock" />
+          <Property Type="Int32" Name="YearReleased" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieStoreModelStoreContainer" CdmEntityContainer="MovieStoreContext">
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="MovieStoreModel.Genres">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="MovieStoreModel.Movies">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="ReviewRating" ColumnName="ReviewRating" />
+                <ScalarProperty Name="MPAARating" ColumnName="MPAARating" />
+                <ScalarProperty Name="YearReleased" ColumnName="YearReleased" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mpaa">
+            <EntityTypeMapping TypeName="MovieStoreModel.Mpaa">
+              <MappingFragment StoreEntitySet="Mpaa">
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="MpaaID" ColumnName="MpaaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwMovies">
+            <EntityTypeMapping TypeName="MovieStoreModel.vwMovies">
+              <MappingFragment StoreEntitySet="vwMovies">
+                <ScalarProperty Name="YearReleased" ColumnName="YearReleased" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ReviewRating" ColumnName="ReviewRating" />
+                <ScalarProperty Name="MpaaRating" ColumnName="MpaaRating" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

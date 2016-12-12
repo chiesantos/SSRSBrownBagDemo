@@ -1,0 +1,76 @@
+﻿<h3>Movie Store</h3>
+  <ul class="nav nav-tabs" ng-init="initialize()">
+    <li><a href="#/home">Home</a></li>
+    <li><a href="#/genre">Genres</a></li>
+    <li><a href="#/rating">MPAA Ratings</a></li>
+    <li class="active"><a href="#/movies">Movies</a></li>
+    <li><a href="#/reports">Reports</a></li>
+  </ul>
+  <br>
+
+<button type="button" class="btn btn-primary" ng-click="actions.showAddFields()">Add</button>
+<br />
+<br />
+<div class="row" ng-show="isAdding">
+    <div class="col-md-4">
+        Movie Title: <input type="text" class="pull-right" ng-model="movieDTO.Title" />
+        <br />
+        <br />
+        Genre: <select ng-model="movieDTO.Genre" ng-options="opt.GenreID as opt.Description for opt in genres" class="pull-right"><option value="">Choose Genre</option></select>
+        <br />
+        <br />
+        Director: <input type="text" class="pull-right" ng-model="movieDTO.Director"/>
+        <br />
+        <br />
+        Year Released: <input type="text" class="pull-right" ng-model="movieDTO.YearReleased"/>
+        <br />
+        <br />
+        MPAA Rating: <select ng-model="movieDTO.MpaaRating" ng-options="opt.MpaaID as opt.Rating for opt in mpaas" class="pull-right"><option value="">Choose Rating</option></select>
+    </div>
+    <div class="col-md-4">
+        Review Rating: <input type="text" class="pull-right" ng-model="movieDTO.ReviewRating"/>
+        <br />
+        <br />
+        Price: <input type="text" class="pull-right" ng-model="movieDTO.Price"/>
+        <br />
+        <br />
+        Stock: <input type="text" class="pull-right" ng-model="movieDTO.Stock"/>
+        <br />
+        <br />
+        <button type="button" class="btn btn-success pull-right" ng-click="actions.create()" ng-hide="isEditMode">Save</button>
+        <button type="button" class="btn btn-success pull-right" ng-click="actions.update()" ng-show="isEditMode">Edit</button>
+    </div>
+    <div class="col-md-4">
+        <span class="glyphicon glyphicon-remove" ng-click="actions.hideFields()" style="cursor: pointer;"></span>
+    </div>
+</div>  
+<br />
+ <table class="table">
+     <tr>
+         <th>ID</th>
+         <th>Title</th>
+         <th>Genre</th>
+         <th>Director</th>
+         <th>Year Released</th>
+         <th>MPAA Rating</th>
+         <th>Review Rating</th>
+         <th>Price</th>
+         <th>Stock</th>
+         <th>Action</th>
+     </tr>
+     <tr ng-repeat="item in movies">
+         <td>{{item.MovieID}}</td>
+         <td>{{item.Title}}</td>
+         <td>{{item.Genre}}</td>
+         <td>{{item.Director}}</td>
+         <td>{{item.YearReleased}}</td>
+         <td>{{item.MpaaRating}}</td>
+         <td>{{item.ReviewRating}}</td>
+         <td>{{item.Price}}</td>
+         <td>{{item.Stock}}</td>
+         <td>
+             <span class="glyphicon glyphicon-edit" style="margin-right: 15px; cursor: pointer;" title="Edit" ng-click="actions.editMode(item.MovieID)"></span>
+             <span class="glyphicon glyphicon-trash" style="cursor: pointer;" title="Delete" ng-click="actions.disable(item.MovieID)"></span>
+         </td>
+     </tr>
+ </table>

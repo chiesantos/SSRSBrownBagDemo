@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Genres">
+    <Key>
+      <PropertyRef Name="GenreID" />
+    </Key>
+    <Property Name="GenreID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Enable" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movies">
+    <Key>
+      <PropertyRef Name="MovieID" />
+    </Key>
+    <Property Name="MovieID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" />
+    <Property Name="Genre" Type="bigint" />
+    <Property Name="Director" Type="varchar" MaxLength="100" />
+    <Property Name="ReviewRating" Type="int" />
+    <Property Name="MPAARating" Type="bigint" />
+    <Property Name="YearReleased" Type="int" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="Enable" Type="bit" />
+  </EntityType>
+  <EntityType Name="MPAA">
+    <Key>
+      <PropertyRef Name="MPAAID" />
+    </Key>
+    <Property Name="MPAAID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rating" Type="varchar" MaxLength="15" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="Enable" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Movies_Genres">
+    <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+    <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genres">
+        <PropertyRef Name="GenreID" />
+      </Principal>
+      <Dependent Role="Movies">
+        <PropertyRef Name="Genre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_MPAA">
+    <End Role="MPAA" Type="Self.MPAA" Multiplicity="0..1" />
+    <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MPAA">
+        <PropertyRef Name="MPAAID" />
+      </Principal>
+      <Dependent Role="Movies">
+        <PropertyRef Name="MPAARating" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MovieStoreModelStoreContainer">
+    <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MPAA" EntityType="Self.MPAA" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Movies_Genres" Association="Self.FK_Movies_Genres">
+      <End Role="Genres" EntitySet="Genres" />
+      <End Role="Movies" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_MPAA" Association="Self.FK_Movies_MPAA">
+      <End Role="MPAA" EntitySet="MPAA" />
+      <End Role="Movies" EntitySet="Movies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

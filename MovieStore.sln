@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStore.Views", "Views\MovieStore.Views.csproj", "{5CEEA98E-7331-4D4C-BBC7-BA6C0E970C16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStore.WebApi", "MovieStore.WebApi\MovieStore.WebApi.csproj", "{7F30C6CA-3831-47FB-B11A-96AC86BBC1DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CEEA98E-7331-4D4C-BBC7-BA6C0E970C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CEEA98E-7331-4D4C-BBC7-BA6C0E970C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CEEA98E-7331-4D4C-BBC7-BA6C0E970C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CEEA98E-7331-4D4C-BBC7-BA6C0E970C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F30C6CA-3831-47FB-B11A-96AC86BBC1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F30C6CA-3831-47FB-B11A-96AC86BBC1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F30C6CA-3831-47FB-B11A-96AC86BBC1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F30C6CA-3831-47FB-B11A-96AC86BBC1DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

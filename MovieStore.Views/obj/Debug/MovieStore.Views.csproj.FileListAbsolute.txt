@@ -1,0 +1,10 @@
+C:\Users\Katherina Ann Santos\Documents\Visual Studio 2013\Projects\MovieStore\Views\bin\Views.dll.config
+C:\Users\Katherina Ann Santos\Documents\Visual Studio 2013\Projects\MovieStore\Views\bin\Views.dll
+C:\Users\Katherina Ann Santos\Documents\Visual Studio 2013\Projects\MovieStore\Views\bin\Views.pdb
+C:\Users\Katherina Ann Santos\Documents\Visual Studio 2013\Projects\MovieStore\Views\obj\Debug\Views.dll
+C:\Users\Katherina Ann Santos\Documents\Visual Studio 2013\Projects\MovieStore\Views\obj\Debug\Views.pdb
+C:\Users\Katherina Ann Santos\documents\visual studio 2012\Projects\MovieStore\Views\bin\Views.dll
+C:\Users\Katherina Ann Santos\documents\visual studio 2012\Projects\MovieStore\Views\bin\Views.pdb
+C:\Users\Katherina Ann Santos\documents\visual studio 2012\Projects\MovieStore\Views\obj\Debug\MovieStore.Views.csprojResolveAssemblyReference.cache
+C:\Users\Katherina Ann Santos\documents\visual studio 2012\Projects\MovieStore\Views\obj\Debug\Views.dll
+C:\Users\Katherina Ann Santos\documents\visual studio 2012\Projects\MovieStore\Views\obj\Debug\Views.pdb

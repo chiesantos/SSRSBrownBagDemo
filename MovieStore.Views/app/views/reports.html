@@ -1,0 +1,41 @@
+﻿<h3>Movie Store</h3>
+  <ul class="nav nav-tabs" ng-init="initialize()">
+    <li><a href="#/home">Home</a></li>
+    <li><a href="#/genre">Genres</a></li>
+    <li><a href="#/rating">MPAA Ratings</a></li>
+    <li><a href="#/movie">Movies</a></li>
+    <li class="active"><a href="#/reports">Reports</a></li>
+  </ul>
+  <br>
+  <p>
+      <table class="table">
+          <th>Report Name</th>
+          <th>Parameters</th>
+          <th>Action</th>
+          <tr>
+              <td>All genre</td>
+              <td></td>
+              <td>
+                  <button type="button" class="btn btn-primary" ng-click="generateReport('ListReport-AllGenre', false, 1)">Generate</button>
+              </td>
+          </tr>
+          <tr>
+              <td>Movie list according to genre</td>
+              <td>
+                  Genre: <select ng-model="genre" ng-options="opt.GenreID as opt.Description for opt in genres"></select>
+              </td>
+              <td>
+                  <button type="button" class="btn btn-primary" ng-click="generateReport('ListReport-MoviesByGenre', true, 2)">Generate</button>
+              </td>
+          </tr>
+          <tr>
+              <td>Movie list according to year released</td>
+              <td>
+                  Year: <input type="text" ng-model="year" />
+              </td>
+              <td>
+                  <button type="button" class="btn btn-primary" ng-click="generateReport('ListReport-MoviesByYear', true, 3)">Generate</button>
+              </td>
+          </tr>
+      </table>
+  </p>

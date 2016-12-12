@@ -1,0 +1,48 @@
+﻿<h3>Movie Store</h3>
+<ul class="nav nav-tabs" ng-init="initialize()">
+    <li><a href="#/home">Home</a></li>
+    <li><a href="#/genre">Genres</a></li>
+    <li class="active"><a href="#/rating">MPAA Ratings</a></li>
+    <li><a href="#/movie">Movies</a></li>
+    <li><a href="#/reports">Reports</a></li>
+</ul>
+<br />
+
+<button type="button" class="btn btn-primary" ng-click="actions.showAddFields()">Add</button>
+<br />
+<br />
+<div class="row" ng-show="isAdding">
+    <div class="col-md-4">
+        Rating Initial: <input type="text" class="pull-right" ng-model="mpaaDTO.Description" />
+        <br />
+        <br />
+        Description: <textarea class="pull-right" ng-model="mpaaDTO.Description"></textarea>
+        <br />
+        <br />
+        <br />
+        <button type="button" class="btn btn-success pull-right" ng-click="actions.create()" ng-hide="isEditMode">Save</button>
+        <button type="button" class="btn btn-success pull-right" ng-click="actions.update()" ng-show="isEditMode">Edit</button>
+    </div>
+    <div class="col-md-8">
+        <span class="glyphicon glyphicon-remove" ng-click="actions.hideFields()" style="cursor: pointer;"></span>
+    </div>
+</div>  
+
+<br />
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Rating</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    <tr ng-repeat="item in mpaas">
+        <td>{{item.MpaaID}}</td>
+        <td>{{item.Rating}}</td>
+        <td>{{item.Description}}</td>
+        <td>
+             <span class="glyphicon glyphicon-edit" style="margin-right: 15px; cursor: pointer;" title="Edit" ng-click="actions.editMode(item.MpaaID)"></span>
+             <span class="glyphicon glyphicon-trash" style="cursor: pointer;" title="Delete" ng-click="actions.disable(item.MpaaID)"></span>
+         </td>
+    </tr>
+</table>
